@@ -1,0 +1,11 @@
+server:
+  error:
+    include-stacktrace: on-param
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:patients-db
+  h2:
+    console:
+      enabled: true
+
