@@ -34,6 +34,11 @@ public class PatientController {
         return patientService.search();
     }
 
+    @GetMapping("/by-gender")
+    public List<Patient> findByGender(Patient.Gender gender) {
+        return patientService.findByGender(gender);
+    }
+
     @GetMapping("/{id}")
     public Patient getById(@PathVariable Long id) {
         return patientService.findById(id).orElseThrow();

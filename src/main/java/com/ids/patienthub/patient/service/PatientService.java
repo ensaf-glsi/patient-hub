@@ -34,4 +34,9 @@ public class PatientService {
     public void remove(Long id) {
         patientRepository.deleteById(id);
     }
+
+
+    public List<Patient> findByGender(Patient.Gender gender) {
+        return patientRepository.findByGender(gender);
+    }
 }
