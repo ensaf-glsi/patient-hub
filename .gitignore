@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/src/docker/mysql/data/
+/src/docker/postgres/data/
