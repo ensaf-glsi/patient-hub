@@ -1,9 +1,6 @@
 package com.ids.patienthub.patient.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,4 +25,20 @@ public class Patient {
     @NotBlank @Length(max = 100)
     private String name;
     private LocalDate birthDate;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    @Enumerated(EnumType.STRING)
+    private FamilyStatus familyStatus;
+    private String profession;
+    @Enumerated(EnumType.STRING)
+    private Mutual mutual;
+
+
+    public static enum Gender {
+        MALE, FEMALE
+    }
+    public static enum FamilyStatus {
+        SINGLE, MARRIED, DIVORCED, WIDOWED, SEPARATED
+    }
+
 }
