@@ -18,7 +18,7 @@ spring:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 
     # === postgres
-    url: jdbc:postgresql://localhost:5433/patients_db
+    url: jdbc:postgresql://localhost:5432/patients_db
     username: patient_hub
     password: Pass_24
     driver-class-name: org.postgresql.Driver

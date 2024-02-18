@@ -34,3 +34,4 @@ build/
 
 /src/docker/mysql/data/
 /src/docker/postgres/data/
+/upload-dir/
