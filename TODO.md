@@ -10,6 +10,8 @@
 
 [ ] Pagination
 
+[ ] Auditing
+
 [ ] Programmation fonctionnel (Lambda function, collections, Stream [filter, map, ...], Optional)
 
 [ ] Liquibase

@@ -4,6 +4,8 @@ import com.ids.patienthub.patient.entity.Patient;
 import com.ids.patienthub.patient.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,13 +32,16 @@ public class PatientController {
     private PatientService patientService;
 
     @GetMapping
-    public List<Patient> search() {
-        return patientService.search();
+    public Page<Patient> search(Pageable pageable, @RequestParam(required = false) boolean all) {
+        if (all) {
+            pageable = Pageable.unpaged(pageable.getSort());
+        }
+        return patientService.search(pageable);
     }
 
     @GetMapping("/by-gender")
-    public List<Patient> findByGender(Patient.Gender gender) {
-        return patientService.findByGender(gender);
+    public Page<Patient> findByGender(Patient.Gender gender, Pageable pageable) {
+        return patientService.findByGender(gender, pageable);
     }
 
     @GetMapping("/{id}")
