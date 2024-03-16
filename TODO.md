@@ -10,7 +10,9 @@
 
 [x] Pagination
 
-[ ] Auditing
+[x] Avantages et inconvénients record et relation avec lombok
+
+[x] Auditing
 https://www.baeldung.com/database-auditing-jpa
 https://vladmihalcea.com/how-to-audit-entity-modifications-using-the-jpa-entitylisteners-embedded-and-embeddable-annotations/
 https://docs.spring.io/spring-data/jpa/reference/auditing.html
@@ -21,13 +23,22 @@ https://docs.spring.io/spring-data/jpa/reference/auditing.html
 - updated by
 - revision
 
-[ ] DTO
+[x] hibernate envers
 
-[ ] Programmation fonctionnel (Lambda function, collections, Stream [filter, map, ...], Optional)
+[x] DTO
+https://www.baeldung.com/java-performance-mapping-frameworks
+https://www.baeldung.com/mapstruct
+
+[x] MapStruct
+https://github.com/mapstruct/mapstruct-examples
+
+[x] Programmation fonctionnel (Lambda function, collections, Stream [filter, map, ...], Optional)
 
 [ ] Liquibase
 
 [ ] Journalisation (Logback)
+
+[ ] projections
 
 [ ] Spring Security
 

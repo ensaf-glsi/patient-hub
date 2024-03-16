@@ -1,5 +1,7 @@
 package com.ids.patienthub.patient.web;
 
+import com.ids.patienthub.patient.dto.DetailPatientDto;
+import com.ids.patienthub.patient.dto.PatientDto;
 import com.ids.patienthub.patient.entity.Patient;
 import com.ids.patienthub.patient.service.PatientService;
 import jakarta.validation.Valid;
@@ -8,8 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 /*
@@ -45,13 +45,13 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public Patient getById(@PathVariable Long id) {
+    public DetailPatientDto getById(@PathVariable Long id) {
         return patientService.findById(id).orElseThrow();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Patient create(@Valid @RequestBody Patient patient) {
+    public DetailPatientDto create(@Valid @RequestBody PatientDto patient) {
         return patientService.create(patient);
     }
 
