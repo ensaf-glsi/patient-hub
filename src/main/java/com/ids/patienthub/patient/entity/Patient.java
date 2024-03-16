@@ -1,32 +1,25 @@
 package com.ids.patienthub.patient.entity;
 
-import jakarta.persistence.*;
+import com.ids.patienthub.commons.jpa.entity.CustomAbstractFullAuditable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-@EntityListeners(AuditingEntityListener.class)
+@Audited
 @Entity
 @SuperBuilder
-@Data
+@Getter @Setter
+@ToString
 @RequiredArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class Patient {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class Patient extends CustomAbstractFullAuditable<Long> {
 
     @Column(length = 100)
     @NotBlank @Length(max = 100)
@@ -40,19 +33,6 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private Mutual mutual;
 
-    @Column(updatable = false)
-    @CreatedDate
-    private LocalDateTime createdDate;
-
-    @Column(updatable = false)
-    @CreatedBy
-    private String createdBy;
-
-    @LastModifiedDate
-    private LocalDateTime modifiedDate;
-
-    @LastModifiedBy
-    private String modifiedBy;
 
     public static enum Gender {
         MALE, FEMALE

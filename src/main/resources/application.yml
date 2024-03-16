@@ -28,3 +28,13 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      org.hibernate:
+        # https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#envers
+        envers:
+          default_schema: history
+          use_revision_entity_with_native_id: true
+          audit_strategy: org.hibernate.envers.strategy.internal.ValidityAuditStrategy
+          audit_strategy_validity_store_revend_timestamp: true
+#          track_entities_changed_in_revision: false
+#          global_with_modified_flag: false

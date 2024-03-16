@@ -60,4 +60,13 @@ public class PatientService {
     public Page<Patient> findByGender(Patient.Gender gender, Pageable pageable) {
         return patientRepository.findByGender(gender, pageable);
     }
+
+    public Object findRevisions(Long id, Pageable pageable) {
+        return patientRepository.findRevisions(id, pageable);
+    }
+
+    public Object findRevision(Long id, Long revisionNumber) {
+        return patientRepository.findRevision(id, revisionNumber);
+    }
+
 }

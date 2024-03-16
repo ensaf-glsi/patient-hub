@@ -66,4 +66,14 @@ public class PatientController {
         patientService.remove(id);
     }
 
+    @GetMapping("/{id}/revisions")
+    public Object findRevisions(@PathVariable Long id, Pageable pageable) {
+        return patientService.findRevisions(id, pageable);
+    }
+
+    @GetMapping("/{id}/revisions/{revision}")
+    public Object getRevision(@PathVariable Long id, @PathVariable Long revision) {
+        return patientService.findRevision(id, revision);
+    }
+
 }
