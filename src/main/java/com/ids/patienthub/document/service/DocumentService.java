@@ -5,7 +5,7 @@ import com.ids.patienthub.document.dao.DocumentRepository;
 import com.ids.patienthub.document.entity.Document;
 import com.ids.patienthub.document.exceptions.FileNotFoundException;
 import com.ids.patienthub.document.exceptions.StorageException;
-import com.ids.patienthub.document.model.DocumentDto;
+import com.ids.patienthub.document.dto.DocumentDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -107,6 +107,11 @@ public class DocumentService {
         } catch (MalformedURLException e) {
             throw new FileNotFoundException("Could not read file: " + id, e);
         }
+    }
+
+    public void delete(String id) {
+        //TODO il ne faut pas oublier de supprimer le document
+        documentRepository.deleteById(id);
     }
 
 }

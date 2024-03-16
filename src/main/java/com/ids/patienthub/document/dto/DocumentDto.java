@@ -1,4 +1,4 @@
-package com.ids.patienthub.document.model;
+package com.ids.patienthub.document.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,10 +1,11 @@
 package com.ids.patienthub.document.web;
 
-import com.ids.patienthub.document.model.DocumentDto;
+import com.ids.patienthub.document.dto.DocumentDto;
 import com.ids.patienthub.document.service.DocumentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,4 +37,11 @@ public class DocumentController {
                 .toUriString();
 
     }
+
+    @DeleteMapping("/{filename:.+}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable String filename) {
+        documentService.delete(filename);
+    }
+
 }
