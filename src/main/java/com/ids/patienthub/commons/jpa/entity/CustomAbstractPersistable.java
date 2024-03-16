@@ -1,9 +1,9 @@
 package com.ids.patienthub.commons.jpa.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 
@@ -17,16 +17,17 @@ import org.springframework.lang.Nullable;
  * Abstract base class for entities. Allows parameterization of id type, chooses auto-generation and implements
  * {@link #equals(Object)} and {@link #hashCode()} based on that id.
  *
- * @param <PK> the type of the identifier.
+ * @param <I> the type of the identifier.
  */
 @MappedSuperclass
 @SuperBuilder
 @Getter @Setter
 @ToString
 @RequiredArgsConstructor @AllArgsConstructor
-public abstract class CustomAbstractPersistable<PK extends Serializable> implements Persistable<PK> {
+public abstract class CustomAbstractPersistable<I extends Serializable> implements Persistable<I> {
 
-	@Id @GeneratedValue protected @Nullable PK id;
+	@jakarta.persistence.Id
+    @GeneratedValue protected @Nullable I id;
 
 	/**
 	 * Must be {@link Transient} in order to ensure that no JPA provider complains because of a missing setter.
@@ -51,14 +52,12 @@ public abstract class CustomAbstractPersistable<PK extends Serializable> impleme
 			return false;
 		}
 		CustomAbstractPersistable<?> that = (CustomAbstractPersistable<?>) obj;
-		return null == this.getId() ? false : this.getId().equals(that.getId());
+		return Objects.equals(that.id, this.id);
 	}
 
 	@Override
 	public int hashCode() {
-		int hashCode = 17;
-		hashCode += null == getId() ? 0 : getId().hashCode() * 31;
-		return hashCode;
+		return 17 + Objects.hashCode(id) * 31;
 	}
 
 }

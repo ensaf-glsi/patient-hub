@@ -5,11 +5,13 @@ import com.ids.patienthub.patient.dto.PatientDto;
 import com.ids.patienthub.patient.entity.Patient;
 import com.ids.patienthub.patient.service.PatientService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 
 /*
@@ -26,14 +28,14 @@ DELETE /api/v1/patients/{id} : la suppression d'un elt
 
 @RestController
 @RequestMapping("/api/v1/patients")
+@RequiredArgsConstructor
 public class PatientController {
 
-    @Autowired
-    private PatientService patientService;
+    private final PatientService patientService;
 
     @GetMapping
-    public Page<Patient> search(Pageable pageable, @RequestParam(required = false) boolean all) {
-        if (all) {
+    public Page<Patient> search(Pageable pageable, @RequestParam(required = false) Boolean all) {
+        if (Objects.equals(all, false)) {
             pageable = Pageable.unpaged(pageable.getSort());
         }
         return patientService.search(pageable);
