@@ -1,5 +1,6 @@
 package com.ids.patienthub.config;
 
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -11,10 +12,15 @@ import java.util.Optional;
 @EnableJpaAuditing
 public class JpaAuditingConfig {
 
-  @Bean
-  public AuditorAware<String> auditorProvider() {
-    return new SpringSecurityAuditorAware();
-  }
+    @Bean
+    public AuditorAware<String> auditorProvider() {
+        return new SpringSecurityAuditorAware();
+    }
+
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer jacksonCustomizer() {
+        return builder -> builder.failOnEmptyBeans(false).failOnUnknownProperties(false);
+    }
 }
 
 class SpringSecurityAuditorAware implements AuditorAware<String> {
@@ -28,4 +34,5 @@ class SpringSecurityAuditorAware implements AuditorAware<String> {
 //            .map(Authentication::getPrincipal)
 //            .map(User.class::cast);
     }
+
 }
