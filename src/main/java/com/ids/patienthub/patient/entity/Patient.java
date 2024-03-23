@@ -26,18 +26,22 @@ public class Patient extends CustomAbstractFullAuditable<Long> {
     private String name;
     private LocalDate birthDate;
     @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private Gender gender;
     @Enumerated(EnumType.STRING)
+    @Column(length = 60)
     private FamilyStatus familyStatus;
+    @Column(length = 120)
     private String profession;
     @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private Mutual mutual;
 
 
-    public static enum Gender {
+    public enum Gender {
         MALE, FEMALE
     }
-    public static enum FamilyStatus {
+    public enum FamilyStatus {
         SINGLE, MARRIED, DIVORCED, WIDOWED, SEPARATED
     }
 

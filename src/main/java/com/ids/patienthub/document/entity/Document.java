@@ -15,13 +15,14 @@ import org.hibernate.envers.Audited;
 @RequiredArgsConstructor @AllArgsConstructor
 public class Document {
     @Id
+    @Column(nullable = false, length = 80)
     @UuidGenerator(style = UuidGenerator.Style.TIME)
     private String id;
     @Audited
     @Column(length = 100)
     private String filename;
     @Audited
-    @Column(length = 100)
+    @Column(length = 200)
     private String contentType;
     private Long size;
 

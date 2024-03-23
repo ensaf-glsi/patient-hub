@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-001">
+        <createSequence incrementBy="50" sequenceName="patient_seq" startValue="1"/>
+    </changeSet>
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-002">
+        <createSequence incrementBy="50" sequenceName="revinfo_seq" startValue="1"/>
+    </changeSet>
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-003">
+        <createTable tableName="revinfo">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="revinfo_pk"/>
+            </column>
+            <column name="editor" type="VARCHAR(100)"/>
+            <column name="timestamp" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-004">
+        <createTable tableName="document">
+            <column name="id" type="VARCHAR(80)">
+                <constraints primaryKey="true" primaryKeyName="document_pk"/>
+            </column>
+            <column name="content_type" type="VARCHAR(200)"/>
+            <column name="file_size" type="BIGINT"/>
+            <column name="filename" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-005">
+        <createTable tableName="document_aud">
+            <column name="id" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="content_type" type="VARCHAR(200)"/>
+            <column name="filename" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-006">
+        <createTable tableName="patient">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="patient_pK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(100)"/>
+            <column name="created_date" type="datetime"/>
+            <column name="modified_by" type="VARCHAR(100)"/>
+            <column name="modified_date" type="datetime"/>
+            <column name="birth_date" type="date"/>
+            <column name="family_status" type="VARCHAR(60)"/>
+            <column name="gender" type="VARCHAR(20)"/>
+            <column name="mutual" type="VARCHAR(20)"/>
+            <column name="name" type="VARCHAR(100)"/>
+            <column name="profession" type="VARCHAR(120)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-007">
+        <createTable tableName="patient_aud">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="BIGINT">
+                <constraints foreignKeyName="patient_aud_rev_fk" referencedTableName="revinfo" referencedColumnNames="id"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="birth_date" type="date"/>
+            <column name="family_status" type="VARCHAR(60)"/>
+            <column name="gender" type="VARCHAR(20)"/>
+            <column name="mutual" type="VARCHAR(20)"/>
+            <column name="name" type="VARCHAR(100)"/>
+            <column name="profession" type="VARCHAR(120)"/>
+            <column name="revend_tstmp" type="datetime" />
+            <column name="revend" type="bigint">
+                <constraints foreignKeyName="patient_aud_revend_fk" referencedTableName="revinfo" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-008">
+        <addPrimaryKey columnNames="rev, id" constraintName="document_aud_pk" tableName="document_aud"/>
+    </changeSet>
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-009">
+        <addPrimaryKey columnNames="rev, id" constraintName="patient_aud_pk" tableName="patient_aud"/>
+    </changeSet>
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-010">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="document_aud" constraintName="document_aud_rev_fk"
+                                 referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet id="1.x.x-001-update-schema-011" author="zhanafi">
+        <addColumn tableName="document_aud">
+            <column name="revend_tstmp" type="datetime" />
+            <column name="revend" type="bigint">
+                <constraints foreignKeyName="document_aud_revend_fk" referencedTableName="revinfo" referencedColumnNames="id"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="zhanafi" id="1.x.x-001-update-schema-013">
+        <renameColumn tableName="document" oldColumnName="file_size" newColumnName="size" />
+    </changeSet>
+
+</databaseChangeLog>
+

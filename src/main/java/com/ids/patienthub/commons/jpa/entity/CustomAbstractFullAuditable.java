@@ -1,5 +1,6 @@
 package com.ids.patienthub.commons.jpa.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public abstract class CustomAbstractFullAuditable<PK extends Serializable> exten
     private LocalDateTime modifiedDate;
 
     @LastModifiedBy
+    @Column(length = 100)
     private String modifiedBy;
 
 }

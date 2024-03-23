@@ -25,7 +25,7 @@ public abstract class CustomAbstractAuditableWithoutId {
     @CreatedDate
     private LocalDateTime createdDate;
 
-    @Column(updatable = false)
+    @Column(updatable = false, length = 100)
     @CreatedBy
     private String createdBy;
 
