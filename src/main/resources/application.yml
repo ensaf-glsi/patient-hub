@@ -28,7 +28,7 @@ spring:
   jpa:
 #    database: MYSQL
     database: POSTGRESQL
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: validate
     properties:
@@ -42,3 +42,11 @@ spring:
 #          track_entities_changed_in_revision: false
 #          global_with_modified_flag: false
 
+logging:
+  level:
+    root: info
+    com:
+      ids:
+        patienthub:
+          patient:
+            service: debug

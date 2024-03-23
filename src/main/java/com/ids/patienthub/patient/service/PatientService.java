@@ -1,5 +1,6 @@
 package com.ids.patienthub.patient.service;
 
+import com.ids.patienthub.commons.exceptions.IncoherentException;
 import com.ids.patienthub.patient.dao.PatientRepository;
 import com.ids.patienthub.patient.dto.DetailPatientDto;
 import com.ids.patienthub.patient.dto.PatientDto;
@@ -7,6 +8,8 @@ import com.ids.patienthub.patient.entity.Patient;
 import com.ids.patienthub.patient.mappers.PatientMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +23,7 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 public class PatientService {
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final PatientRepository patientRepository;
     private final PatientMapper patientMapper;
@@ -29,11 +33,15 @@ public class PatientService {
     }
 
     public Page<Patient> search(Pageable pageable) {
-//
-//        System.out.println("size : " + pageable.getPageSize());
+        // trace
+        // debug
+        // info
+        // warn
+        // error
+        log.trace("Search patient");
         Sort sort = pageable.getSortOr(Sort.by("name"));
         if (pageable.isPaged()) {
-            System.out.println("page : " + pageable.getPageNumber());
+            log.debug("page : {}", pageable.getPageNumber());
             pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
         } else {
             // bug framework ne supporte pas unaged avec un tri
@@ -47,6 +55,11 @@ public class PatientService {
     }
 
     public DetailPatientDto create(PatientDto dto) {
+        if (dto.getName().length() <= 2) {
+            String reason = "Le nom doit avoir min 3 caractere";
+            log.warn(reason);
+            throw new IncoherentException(reason);
+        }
         return patientMapper.toDto(patientRepository.save(patientMapper.fromDto(dto)));
     }
 

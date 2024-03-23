@@ -34,11 +34,13 @@ https://github.com/mapstruct/mapstruct-examples
 
 [x] Programmation fonctionnel (Lambda function, collections, Stream [filter, map, ...], Optional)
 
-[ ] Liquibase
+[x] Liquibase
 
-[ ] Journalisation (Logback)
+[x] Journalisation (Logback)
 
 [ ] projections
+
+[ ] spring profiles
 
 [ ] Spring Security
 
